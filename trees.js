@@ -65,7 +65,7 @@ class BinarySearchTree {
 
 //      10
 //  5       13  
-//2   s4   11  16
+//2   4   11  16
 
 const tree = new BinarySearchTree();
 tree.insert(11);
