@@ -96,12 +96,82 @@ class DoublyLinkList{
 
     }
     remove(index){
+        if (index === 0) {
+            this.shift(value)
+        }
+        if (index === this.length - 1) {
+            this.pop(value)
+        }
+        // var newNode = new Node(value);
+       else{var beforenode = this.get(index-1);
+        var node = this.get(index);
+        var afterNode=this.get(index+1);
+        beforenode.next=node.next;
+        afterNode.prev=node.prev;}
+        node.next=null;
+        node.prev=null;
+        this.length--;
+        return this;
 
+        
     }
-    insert(value,index){
-
+    insert(value, index){
+        if(index===0){
+            this.unshift(value)
+            return this;
+        }
+        if(index===this.length-1){
+            this.push(value)
+            return this;
+        }else{
+            var newNode = new Node(value);
+            var node = this.get(index-1);
+            var afternode = this.get(index);
+            newNode.next = node.next;
+            node.next = newNode;
+            newNode.prev = node;
+            afternode.prev = newNode;
+        }
+   
+    this.length++;
+    return this;
+    }
+    set(value,index){
+        // var newNode = new Node(value);
+        var node = this.get(index);
+       
+        node.value=value;
+        return this;
     }
     reverse(){
+
+    }
+    get(index){
+        var count;
+        if(this.length<=index||index<0) return "not valid index";
+        if(index>Math.floor(this.length/2)){
+            console.log("greater mid")
+            var current = this.tail;
+            count = this.length-1;
+            while (count !== index) {
+                current = current.prev;
+                --count;
+            }
+            return current;
+        }
+        else if (index === 0){
+
+            return this.head
+        }else{
+            console.log("lesser mid")
+            var current=this.head;
+            count = 0;
+            while (count!==index){
+                current=current.next;
+                count++;
+            }
+            return current;
+        }
 
     }
 }
@@ -111,8 +181,23 @@ d.push(10);
 d.push(20);
 d.push(30);
 d.push(40);
-console.log("at d", d.pop())
-d.shift()
-d.unshift(50);
-console.log(d);
-// console.log(d)
+d.push(5);
+d.push(4);
+d.push(355);
+d.push(454);
+// console.log("at d", d.pop())
+// d.shift()
+// d.unshift(50);
+console.log(d.insert(55,0));
+d.remove(3)
+console.log(d)
+// for(var i=0;i<9;i++){
+//     console.log(d.get(i),i)
+// }
+
+
+// o(N)==>
+// insert-o(1)
+// removal-o(1)
+//searching -o(n/2) =>o(n)
+// access-o(n)
